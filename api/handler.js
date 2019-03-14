@@ -1,5 +1,7 @@
 'use strict';
 
+require('pdftk-lambda')
+
 const fs = require('fs')
 const pdftk = require('node-pdftk');
 const { multiFormParser, removeMeta } = require('./helpers')
