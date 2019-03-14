@@ -21,6 +21,9 @@ provider:
   name: aws
   runtime: nodejs8.10
 
+plugins:
+  - serverless-offline
+
 # you can overwrite defaults here
 #  stage: dev
 #  region: us-east-1
@@ -57,7 +60,8 @@ provider:
 functions:
   hello:
     handler: handler.removeMetaData
-    events: 
+    timeout: 30
+    events:
       - http:
           method: POST
           path: remove-meta-data

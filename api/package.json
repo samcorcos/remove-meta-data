@@ -1,0 +1,32 @@
+{
+  "name": "remove-meta-data-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "handler.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node_modules/.bin/serverless offline start --port 3100"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/samcorcos/remove-meta-data.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/samcorcos/remove-meta-data/issues"
+  },
+  "homepage": "https://github.com/samcorcos/remove-meta-data#readme",
+  "dependencies": {
+    "babel-eslint": "^10.0.1",
+    "busboy": "^0.3.0",
+    "fs": "0.0.1-security",
+    "node-pdftk": "^2.0.2",
+    "serverless": "^1.38.0",
+    "serverless-offline": "^4.9.0",
+    "standard": "^12.0.1"
+  },
+  "standard": {
+    "parser": "babel-eslint"
+  }
+}
