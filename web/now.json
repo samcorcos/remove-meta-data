@@ -1,5 +1,6 @@
 {
   "version": 2,
   "name": "remove-pdf-metadata-web",
-  "builds": [{ "src": "next.config.js", "use": "@now/next" }]
+  "builds": [{ "src": "next.config.js", "use": "@now/next" }],
+  "alias": "removepdfmetadata.com"
 }

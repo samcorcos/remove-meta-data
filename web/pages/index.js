@@ -7,6 +7,13 @@ const URL = 'https://a5xp5w2m61.execute-api.us-east-1.amazonaws.com/dev/remove-m
 // const URL = 'http://localhost:3100/remove-meta-data'
 
 export default class App extends React.Component {
+  constructor (props) {
+    super(props)
+    this.state = {
+      loading: false
+    }
+  }
+
   onDrop = (acceptedFiles, rejectedFiles) => {
     
     // fetch the processing endpoint, automatically download the file
@@ -20,15 +27,24 @@ export default class App extends React.Component {
     data.append('file', file)
     data.append('size', file.size)
 
+    this.setState({ loading: true })
+
     // Sending the content to Server and saving the result to `Downloads` directory of your system
     axios.post(URL, data, { responseType: 'blob' })
-      .then(res => saveAs(new Blob([res.data]), `${file.name}`))
+      .then(res => {
+        this.setState({ loading: false})
+        return saveAs(new Blob([res.data]), `${file.name}`)
+      })
+      .catch(err => {
+        this.setState({ loading: false })
+      })
   }
 
   render () {
     return (
-      <div>
-        Foobnar?
+      <div className='container'>
+        <div className='loading' />
+        Drop a file below to remove metadata from your PDF
 
         <Dropzone onDrop={this.onDrop}>
           {({getRootProps, getInputProps, isDragActive}) => {
@@ -51,6 +67,18 @@ export default class App extends React.Component {
         </Dropzone>
         
         <style jsx>{`
+          .container {
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+          }
+          .loading {
+            height: 10px;
+            width: ${this.state.loading ? '100' : 0}%;
+            opacity: ${this.state.loading ? 1 : 0};
+            background-color: red;
+            transition: width 10s linear;
+          }
           .dropzone {
             transition: all 0.3s ease;
             height: 300px;
