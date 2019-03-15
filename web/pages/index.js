@@ -1,11 +1,28 @@
 import React from 'react'
 import Dropzone from 'react-dropzone'
-import fetch from 'isomorphic-unfetch'
+import { saveAs } from 'file-saver'
+import axios from 'axios'
+
+const URL = 'https://a5xp5w2m61.execute-api.us-east-1.amazonaws.com/dev/remove-meta-data'
+// const URL = 'http://localhost:3100/remove-meta-data'
 
 export default class App extends React.Component {
   onDrop = (acceptedFiles, rejectedFiles) => {
-    // Do something with files
+    
     // fetch the processing endpoint, automatically download the file
+    if (!acceptedFiles.length) {
+      return
+    }
+
+    // Generating a form data with the uploaded file
+    const file = acceptedFiles[0]
+    const data = new FormData()
+    data.append('file', file)
+    data.append('size', file.size)
+
+    // Sending the content to Server and saving the result to `Downloads` directory of your system
+    axios.post(URL, data, { responseType: 'blob' })
+      .then(res => saveAs(new Blob([res.data]), `${file.name}`))
   }
 
   render () {
