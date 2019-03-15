@@ -23,7 +23,13 @@ provider:
 
 plugins:
   - serverless-offline
+  - serverless-apigw-binary
+  - serverless-apigwy-binary
 
+custom:
+  apigwBinary:
+    types:
+      - '*/*'
 # you can overwrite defaults here
 #  stage: dev
 #  region: us-east-1
@@ -66,6 +72,7 @@ functions:
           method: POST
           path: remove-meta-data
           cors: true
+          contentHandling: CONVERT_TO_BINARY
     
 
 #    The following are a few example events you can configure

@@ -3,7 +3,8 @@ import Dropzone from 'react-dropzone'
 import { saveAs } from 'file-saver'
 import axios from 'axios'
 
-const URL = 'http://localhost:3100/remove-meta-data'
+const URL = 'https://a5xp5w2m61.execute-api.us-east-1.amazonaws.com/dev/remove-meta-data'
+// const URL = 'http://localhost:3100/remove-meta-data'
 
 export default class App extends React.Component {
   onDrop = (acceptedFiles, rejectedFiles) => {
@@ -21,7 +22,7 @@ export default class App extends React.Component {
 
     // Sending the content to Server and saving the result to `Downloads` directory of your system
     axios.post(URL, data, { responseType: 'blob' })
-      .then(res => saveAs(res.data, `./${file.name}`))
+      .then(res => saveAs(new Blob([res.data]), `${file.name}`))
   }
 
   render () {

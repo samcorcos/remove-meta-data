@@ -5,7 +5,9 @@
   "main": "handler.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "NODE_ENV=development node_modules/.bin/serverless offline start --port 3100"
+    "start": "NODE_ENV=development node_modules/.bin/serverless offline start --port 3100",
+    "deploy": "node_modules/.bin/serverless deploy -v -s dev",
+    "deploy:prod": "node_modules/.bin/serverless deploy -v -s prod"
   },
   "repository": {
     "type": "git",
@@ -20,12 +22,18 @@
   "dependencies": {
     "babel-eslint": "^10.0.1",
     "busboy": "^0.3.0",
+    "dist-exiftool": "^10.53.0",
     "fs": "0.0.1-security",
+    "node-exiftool": "^2.3.0",
     "node-pdftk": "^2.0.2",
     "pdftk-lambda": "0.0.5",
     "serverless": "^1.38.0",
-    "serverless-offline": "^4.9.0",
     "standard": "^12.0.1"
+  },
+  "devDependencies": {
+    "serverless-apigw-binary": "^0.4.4",
+    "serverless-apigwy-binary": "^1.0.0",
+    "serverless-offline": "^4.9.0"
   },
   "standard": {
     "parser": "babel-eslint"
